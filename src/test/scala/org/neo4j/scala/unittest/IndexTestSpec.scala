@@ -24,7 +24,7 @@ class IndexTestSpec extends SpecificationWithJUnit with Neo4jWrapper with Embedd
       shutdown(ds)
     }
 
-    "use the fulltext search index" in {
+    "add index" in {
 
       val nodeIndex = getNodeIndex("MyTestIndex").get
 
@@ -44,7 +44,7 @@ class IndexTestSpec extends SpecificationWithJUnit with Neo4jWrapper with Embedd
       }
     }
 
-    "remove items from index" in {
+    "remove index" in {
 
       val nodeIndex = getNodeIndex("MyTestIndex").get
 

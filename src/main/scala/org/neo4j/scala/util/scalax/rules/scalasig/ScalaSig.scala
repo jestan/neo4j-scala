@@ -4,7 +4,7 @@ package rules
 package scalasig
 
 import ClassFileParser.{ConstValueIndex, Annotation}
-import scala.reflect.generic.ByteCodecs
+import scala.reflect.internal.pickling.ByteCodecs
 
 object ScalaSigParser {
 
@@ -370,6 +370,6 @@ case class AnnotInfo(refs: Seq[Int])
  *   AnnotArg       = Tree | Constant
  *   ConstAnnotArg  = Constant | AnnotInfo | AnnotArgArray
  *
- *   len is remaining length after `len'.
+ *   len is remaining length after 'len'.
  */
 

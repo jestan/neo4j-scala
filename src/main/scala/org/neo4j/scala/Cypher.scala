@@ -1,6 +1,6 @@
 package org.neo4j.scala
 
-import org.neo4j.cypher.{ExecutionResult, ExecutionEngine}
+import org.neo4j.cypher.{PlanDescription, ExecutionResult, ExecutionEngine}
 import java.io.PrintWriter
 import org.neo4j.graphdb.PropertyContainer
 
@@ -27,11 +27,9 @@ trait TypedExecutionResult extends ExecutionResult {
 class TypedExecutionResultImpl(val er: ExecutionResult) extends TypedExecutionResult {
   def hasNext = er.hasNext
 
-  def next = er.next
+  def next() = er.next()
 
   def columns = er.columns
-
-  def symbols = er.symbols
 
   def javaColumns = er.javaColumns
 
@@ -45,9 +43,9 @@ class TypedExecutionResultImpl(val er: ExecutionResult) extends TypedExecutionRe
     er.dumpToString(writer)
   }
 
-  def dumpToString = er.dumpToString
+  def dumpToString() = er.dumpToString()
 
-  def queryStatistics = er.queryStatistics
+  def queryStatistics() = er.queryStatistics()
 
   /**
    * maps a given column that has to be a property container
@@ -59,6 +57,8 @@ class TypedExecutionResultImpl(val er: ExecutionResult) extends TypedExecutionRe
   def asCC[T: Manifest](column: String): Iterator[T] = {
     new TypedPropertyContainerIterator(er.columnAs[PropertyContainer](column)).iterator
   }
+
+  def executionPlanDescription(): PlanDescription = er.executionPlanDescription()
 }
 
 /**
